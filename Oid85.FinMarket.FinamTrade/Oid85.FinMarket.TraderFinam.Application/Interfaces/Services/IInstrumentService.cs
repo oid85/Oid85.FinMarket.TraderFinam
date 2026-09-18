@@ -1,0 +1,26 @@
+﻿using Oid85.FinMarket.Storage.Core.Requests;
+using Oid85.FinMarket.Storage.Core.Responses;
+
+namespace Oid85.FinMarket.Storage.Application.Interfaces.Services
+{
+    /// <summary>
+    /// Сервис работы с инструментами
+    /// </summary>
+    public interface IInstrumentService
+    {
+        /// <summary>
+        /// Получить инструменты
+        /// </summary>
+        Task<GetInstrumentListResponse?> GetInstrumentListAsync(GetInstrumentListRequest request);
+
+        /// <summary>
+        /// Получить цены
+        /// </summary>
+        Task<GetInstrumentPriceResponse> GetInstrumentPriceAsync(GetInstrumentPriceRequest request);
+
+        /// <summary>
+        /// Загрузить инструменты
+        /// </summary>
+        Task LoadInstrumentsAsync();
+    }
+}

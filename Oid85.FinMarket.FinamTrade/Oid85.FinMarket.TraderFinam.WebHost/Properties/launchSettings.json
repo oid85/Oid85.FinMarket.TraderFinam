@@ -1,0 +1,14 @@
+﻿{
+    "profiles": {
+        "Oid85.FinMarket.TraderFinam.WebHost": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "launchUrl": "http://localhost:12001/swagger",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "applicationUrl": "http://localhost:12001"
+        }
+    },
+    "$schema": "http://json.schemastore.org/launchsettings.json"
+}

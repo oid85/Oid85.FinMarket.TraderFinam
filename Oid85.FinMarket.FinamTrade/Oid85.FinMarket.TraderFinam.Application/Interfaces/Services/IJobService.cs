@@ -1,0 +1,38 @@
+﻿namespace Oid85.FinMarket.Storage.Application.Interfaces.Services
+{
+    /// <summary>
+    /// Сервис работы с запланированными задачами
+    /// </summary>
+    public interface IJobService
+    {
+        /// <summary>
+        /// Загрузить купоны
+        /// </summary>
+        Task LoadBondCouponsAsync();
+
+        /// <summary>
+        /// Загрузить купоны
+        /// </summary>
+        Task LoadBondCouponsAsync(string ticker);
+
+        /// <summary>
+        /// Загрузить свечи
+        /// </summary>
+        Task LoadCandlesAsync();
+
+        /// <summary>
+        /// Загрузить дивиденеды
+        /// </summary>
+        Task LoadDividendsAsync();
+
+        /// <summary>
+        /// Загрузить прогнозы
+        /// </summary>
+        Task LoadForecastConsensusesAsync();
+
+        /// <summary>
+        /// Загрузить инструменты
+        /// </summary>
+        Task LoadInstrumentsAsync();
+    }
+}
