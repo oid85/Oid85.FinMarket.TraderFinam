@@ -32,5 +32,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Database\Repositories\" />
+	  <Folder Include="Protos\" />
 	</ItemGroup>
 </Project>
