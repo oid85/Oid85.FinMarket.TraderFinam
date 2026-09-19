@@ -25,9 +25,10 @@ namespace Oid85.FinMarket.TraderFinam.WebHost
             builder.Services.ConfigureLogger();
             builder.Services.ConfigureCors(builder.Configuration);
             builder.Services.ConfigureHangfire();
-            builder.Services.ConfigureApplicationServices();
             builder.Services.ConfigureDatabase(builder.Configuration);
             builder.Services.ConfigureFinamGrpcClient(builder.Configuration);
+            builder.Services.ConfigureApplicationServices();
+            builder.Services.ConfigureInfrastructureServices();
 
             builder.Services.AddWindowsService(options =>
             {

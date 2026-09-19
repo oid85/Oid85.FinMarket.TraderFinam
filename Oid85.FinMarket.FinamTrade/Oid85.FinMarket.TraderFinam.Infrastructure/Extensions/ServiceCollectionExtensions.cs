@@ -1,11 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Grpc.Tradeapi.V1.Auth;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Repositories;
+using Oid85.FinMarket.TraderFinam.Application.Interfaces.Services;
+using Oid85.FinMarket.TraderFinam.Application.Services;
 using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Database;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories;
+using Oid85.FinMarket.TraderFinam.Infrastructure.Services;
 
 namespace Oid85.FinMarket.TraderFinam.Infrastructure.Extensions;
 
@@ -17,12 +21,12 @@ public static class ServiceCollectionExtensions
     {    
         services.AddDbContextPool<TraderFinamContext>((serviceProvider, options) =>
         {  
-            options.UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresFinMarketTraderFinamConnectionString)!);
+            options.UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresFinMarketTraderFinamConnectionString));
         });
 
         services.AddPooledDbContextFactory<TraderFinamContext>(options =>
             options
-                .UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresFinMarketTraderFinamConnectionString)!)
+                .UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresFinMarketTraderFinamConnectionString))
                 .EnableServiceProviderCaching(false), poolSize: 32);
 
         services.AddTransient<IParameterRepository, ParameterRepository>();
@@ -32,7 +36,16 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        
+        services.AddGrpcClient<AuthService.AuthServiceClient>(KnownGrpcClients.AuthServiceClient, options =>
+        {
+            options.Address = new Uri(configuration.GetValue<string>(KnownSettingsKeys.FinamGrpcUrl)!);
+        });
+    }
+
+    public static void ConfigureInfrastructureServices(
+    this IServiceCollection services)
+    {
+        services.AddTransient<IFinamService, FinamService>();
     }
 
     public static async Task ApplyMigrations(this IHost host)
