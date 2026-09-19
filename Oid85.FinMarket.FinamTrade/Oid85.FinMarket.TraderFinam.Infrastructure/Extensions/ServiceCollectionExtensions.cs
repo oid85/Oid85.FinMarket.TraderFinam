@@ -28,6 +28,13 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IParameterRepository, ParameterRepository>();
     }
 
+    public static void ConfigureFinamGrpcClient(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+
+    }
+
     public static async Task ApplyMigrations(this IHost host)
     {
         var scopeFactory = host.Services.GetRequiredService<IServiceScopeFactory>();
