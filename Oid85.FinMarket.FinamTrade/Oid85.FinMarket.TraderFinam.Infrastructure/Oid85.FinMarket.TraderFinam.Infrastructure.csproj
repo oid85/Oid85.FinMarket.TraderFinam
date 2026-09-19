@@ -7,6 +7,13 @@
   </PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="EFCore.NamingConventions" />
+		<PackageReference Include="Google.Protobuf" />
+		<PackageReference Include="Grpc.AspNetCore" />
+		<PackageReference Include="Grpc.Net.Client" />
+		<PackageReference Include="Grpc.Tools">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" />
@@ -32,6 +39,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Database\Repositories\" />
-	  <Folder Include="Protos\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="proto\grpc\tradeapi\v1\auth\auth_service.proto" GrpcServices="Client" />
 	</ItemGroup>
 </Project>
