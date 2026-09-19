@@ -32,6 +32,7 @@
 		<PackageReference Include="NLog.Targets.Seq" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
 		<PackageReference Include="Npgsql" />
+		<PackageReference Include="Tinkoff.InvestApi" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Oid85.FinMarket.TraderFinam.Application\Oid85.FinMarket.TraderFinam.Application.csproj" />
@@ -39,8 +40,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Database\Repositories\" />
-	</ItemGroup>
-	<ItemGroup>
-		<Protobuf Include="proto\grpc\tradeapi\v1\auth\auth_service.proto" GrpcServices="Client" />
 	</ItemGroup>
 </Project>

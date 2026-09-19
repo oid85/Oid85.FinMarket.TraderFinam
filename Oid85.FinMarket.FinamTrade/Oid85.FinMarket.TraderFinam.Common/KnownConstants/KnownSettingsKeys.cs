@@ -4,5 +4,6 @@ public static class KnownSettingsKeys
 {
     public const string PostgresFinMarketTraderFinamConnectionString = "Postgres:FinMarketTraderFinamConnectionString";
     public const string PostgresApplyMigrationsOnStart = "Postgres:ApplyMigrationsOnStart";
-    public const string DeployPort = "DeployPort";    
+    public const string DeployPort = "DeployPort";
+    public const string FinamGrpcUrl = "FinamGrpc:Url";
 }
