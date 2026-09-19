@@ -32,7 +32,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-
+        
     }
 
     public static async Task ApplyMigrations(this IHost host)
