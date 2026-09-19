@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Oid85.FinMarket.Storage.Core;
-using Oid85.FinMarket.Storage.Core.Exceptions;
+using Oid85.FinMarket.TraderFinam.Core;
+using Oid85.FinMarket.TraderFinam.Core.Exceptions;
 
-namespace Oid85.FinMarket.Storage.WebHost.Controller.Base;
+namespace Oid85.FinMarket.TraderFinam.WebHost.Controller.Base;
 
 [ApiController]
 public abstract class BaseController : ControllerBase

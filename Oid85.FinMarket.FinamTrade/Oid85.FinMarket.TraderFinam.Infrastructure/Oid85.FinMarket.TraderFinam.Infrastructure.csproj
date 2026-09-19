@@ -5,12 +5,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Adapters\Helpers\**" />
-    <EmbeddedResource Remove="Adapters\Helpers\**" />
-    <None Remove="Adapters\Helpers\**" />
-  </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="EFCore.NamingConventions" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
@@ -31,10 +25,12 @@
 		<PackageReference Include="NLog.Targets.Seq" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
 		<PackageReference Include="Npgsql" />
-		<PackageReference Include="Tinkoff.InvestApi" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Oid85.FinMarket.TraderFinam.Application\Oid85.FinMarket.TraderFinam.Application.csproj" />
 	  <ProjectReference Include="..\Oid85.FinMarket.TraderFinam.Common\Oid85.FinMarket.TraderFinam.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Database\Repositories\" />
 	</ItemGroup>
 </Project>

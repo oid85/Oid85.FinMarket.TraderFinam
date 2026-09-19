@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Oid85.FinMarket.Storage.Common.Utils;
+namespace Oid85.FinMarket.TraderFinam.Common.Utils;
 
 public static class StringUtils
 {  

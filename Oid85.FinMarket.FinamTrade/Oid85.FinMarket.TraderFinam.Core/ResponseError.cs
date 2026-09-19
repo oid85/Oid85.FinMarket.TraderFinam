@@ -1,4 +1,4 @@
-﻿namespace Oid85.FinMarket.Storage.Core;
+﻿namespace Oid85.FinMarket.TraderFinam.Core;
 
 public class ResponseError
 {

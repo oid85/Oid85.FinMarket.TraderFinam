@@ -2,7 +2,7 @@
 using NLog;
 using ILogger = NLog.ILogger;
 
-namespace Oid85.FinMarket.Storage.WebHost.Extensions;
+namespace Oid85.FinMarket.TraderFinam.WebHost.Extensions;
 
 public static class ServiceCollectionExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace Oid85.FinMarket.Storage.Core.Exceptions;
+﻿namespace Oid85.FinMarket.TraderFinam.Core.Exceptions;
 
 [Serializable]
 public class NotFoundException : Exception

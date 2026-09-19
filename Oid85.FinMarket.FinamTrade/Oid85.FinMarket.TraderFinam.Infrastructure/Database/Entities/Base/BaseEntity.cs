@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Oid85.FinMarket.Storage.Infrastructure.Database.Entities.Base;
+namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Entities.Base;
 
 public class BaseEntity
 {

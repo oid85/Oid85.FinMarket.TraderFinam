@@ -1,4 +1,4 @@
-﻿namespace Oid85.FinMarket.Storage.Common.KnownConstants;
+﻿namespace Oid85.FinMarket.TraderFinam.Common.KnownConstants;
 
 public static class KnownCountryCodes
 {

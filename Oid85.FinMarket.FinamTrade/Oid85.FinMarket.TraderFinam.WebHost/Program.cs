@@ -1,12 +1,12 @@
 using System.Text.Json.Serialization;
 using Hangfire;
-using Oid85.FinMarket.Storage.Application.Extensions;
-using Oid85.FinMarket.Storage.Common.Converters;
-using Oid85.FinMarket.Storage.Common.KnownConstants;
-using Oid85.FinMarket.Storage.Infrastructure.Extensions;
-using Oid85.FinMarket.Storage.WebHost.Extensions;
+using Oid85.FinMarket.TraderFinam.Application.Extensions;
+using Oid85.FinMarket.TraderFinam.Common.Converters;
+using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
+using Oid85.FinMarket.TraderFinam.Infrastructure.Extensions;
+using Oid85.FinMarket.TraderFinam.WebHost.Extensions;
 
-namespace Oid85.FinMarket.Storage.WebHost
+namespace Oid85.FinMarket.TraderFinam.WebHost
 {
     public class Program
     {
@@ -26,12 +26,11 @@ namespace Oid85.FinMarket.Storage.WebHost
             builder.Services.ConfigureCors(builder.Configuration);
             builder.Services.ConfigureHangfire();
             builder.Services.ConfigureApplicationServices();
-            builder.Services.ConfigureDatabase(builder.Configuration);
-            builder.Services.ConfigureInvestApiClient(builder.Configuration);
+            builder.Services.ConfigureDatabase(builder.Configuration);            
 
             builder.Services.AddWindowsService(options =>
             {
-                options.ServiceName = "Oid85.FinMarket.Storage";
+                options.ServiceName = "Oid85.FinMarket.TraderFinam";
             });
 
             builder.Services.AddOpenApi();
