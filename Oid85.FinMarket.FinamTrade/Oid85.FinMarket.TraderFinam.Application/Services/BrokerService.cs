@@ -5,11 +5,19 @@ using Oid85.FinMarket.TraderFinam.Core.Responses;
 namespace Oid85.FinMarket.TraderFinam.Application.Services
 {
     /// <inheritdoc />
-    public class BrokerService : IBrokerService
+    public class BrokerService(
+        IFinamService finamService)
+        : IBrokerService
     {
-        public Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
+        public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
         {
-            throw new NotImplementedException();
+            var response = await finamService.GetJwtTokenAsync(
+                new JwtTokenRequest
+                {
+
+                });
+
+            return new();
         }
     }
 }
