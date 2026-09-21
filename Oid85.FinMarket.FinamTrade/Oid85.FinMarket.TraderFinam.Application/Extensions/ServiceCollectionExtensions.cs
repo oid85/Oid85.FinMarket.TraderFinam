@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
     public static void ConfigureApplicationServices(
         this IServiceCollection services)
     {
-        services.AddTransient<IBrokerService, BrokerService>();
+        services.AddTransient<ITraderService, TraderService>();
         services.AddTransient<IJobService, JobService>();
     }
 

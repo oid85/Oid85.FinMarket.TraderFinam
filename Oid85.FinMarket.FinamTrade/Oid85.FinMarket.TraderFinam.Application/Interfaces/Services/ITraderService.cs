@@ -6,7 +6,7 @@ namespace Oid85.FinMarket.TraderFinam.Application.Interfaces.Services
     /// <summary>
     /// Брокер сервис
     /// </summary>
-    public interface IBrokerService
+    public interface ITraderService
     {
         Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request);
     }

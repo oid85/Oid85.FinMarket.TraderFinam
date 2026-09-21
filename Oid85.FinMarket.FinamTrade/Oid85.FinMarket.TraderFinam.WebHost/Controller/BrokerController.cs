@@ -13,7 +13,7 @@ namespace Oid85.FinMarket.TraderFinam.WebHost.Controller;
 [Route("api/broker-finam")]
 [ApiController]
 public class BrokerController(
-    IBrokerService brokerService)
+    ITraderService brokerService)
     : BaseController
 {
     /// <summary>

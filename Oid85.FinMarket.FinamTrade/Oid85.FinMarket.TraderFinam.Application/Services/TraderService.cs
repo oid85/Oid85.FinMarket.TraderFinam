@@ -5,9 +5,9 @@ using Oid85.FinMarket.TraderFinam.Core.Responses;
 namespace Oid85.FinMarket.TraderFinam.Application.Services
 {
     /// <inheritdoc />
-    public class BrokerService(
+    public class TraderService(
         IFinamService finamService)
-        : IBrokerService
+        : ITraderService
     {
         public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
         {

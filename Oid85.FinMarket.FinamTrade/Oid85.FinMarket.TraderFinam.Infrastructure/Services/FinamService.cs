@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Grpc.Net.ClientFactory;
+﻿using Grpc.Net.ClientFactory;
 using Grpc.Tradeapi.V1.Auth;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Repositories;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Services;

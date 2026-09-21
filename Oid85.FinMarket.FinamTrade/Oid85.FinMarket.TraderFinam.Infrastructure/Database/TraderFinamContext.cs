@@ -8,6 +8,7 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database;
 public class TraderFinamContext(DbContextOptions<TraderFinamContext> options) : DbContext(options)
 {
     public DbSet<ParameterEntity> ParameterEntities { get; set; }
+    public DbSet<TokenEntity> TokenEntities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
