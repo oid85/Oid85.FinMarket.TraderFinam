@@ -35,7 +35,28 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             var totalSum = accountResponse.Equity.Value.ToDecimal();
 
-            var response = new PortfolioInfoResponse { TotalSum = totalSum };
+            var positions = new List<PositionData>();
+
+            foreach (var position in accountResponse.Positions)
+            {
+                string ticker = position.Symbol.Replace("@MISX", "");
+                int size = Convert.ToInt32(position.Quantity.Value.Replace("+", "").ToDouble());
+                decimal price = position.CurrentPrice.Value.ToDecimal();
+                decimal cost = price * size;
+
+                positions.Add(
+                    new PositionData
+                    {
+                        Ticker = ticker,
+                        Size = size,
+                        Cost = cost
+                    });
+            }
+
+            var response = new PortfolioInfoResponse 
+            {
+                TotalSum = totalSum 
+            };
 
             return response;
         }
