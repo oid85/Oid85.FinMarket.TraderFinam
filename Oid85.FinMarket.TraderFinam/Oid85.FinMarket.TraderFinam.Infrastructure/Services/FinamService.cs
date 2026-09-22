@@ -6,6 +6,7 @@ using Oid85.FinMarket.TraderFinam.Application.Interfaces.Repositories;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Services;
 using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
 using Oid85.FinMarket.TraderFinam.Common.Utils;
+using Oid85.FinMarket.TraderFinam.Core.Models;
 using Oid85.FinMarket.TraderFinam.Core.Requests;
 using Oid85.FinMarket.TraderFinam.Core.Responses;
 
