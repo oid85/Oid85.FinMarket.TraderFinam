@@ -2,5 +2,6 @@
 {
     public class PortfolioInfoResponse
     {
+        public decimal TotalSum { get; set; }
     }
 }

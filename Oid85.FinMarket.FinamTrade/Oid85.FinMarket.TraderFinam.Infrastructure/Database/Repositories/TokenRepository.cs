@@ -13,15 +13,19 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories
         {
             await using var context = await contextFactory.CreateDbContextAsync();
 
-            var entity = await context.TokenEntities.FirstOrDefaultAsync(x => x.Expire >= DateTime.Now.AddMinutes(5));
+            var entities = await context.TokenEntities
+                .AsNoTracking()
+                .ToListAsync();
 
-            if (entity is null)
+            var notExpired = entities.Where(x => x.Expire >= DateTime.UtcNow.AddMinutes(5)).ToList();
+
+            if (notExpired.Count == 0)
             {
                 await context.TokenEntities.ExecuteDeleteAsync();
                 return null;
             }
 
-            return entity.Value;
+            return entities[0].Value;
         }
 
         public async Task SaveTokenAsync(string token, DateTime expire)
@@ -30,7 +34,6 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories
 
             var entity = new TokenEntity
             {
-                Id = Guid.NewGuid(),
                 Name = KnownParameterNames.ApiToken,
                 Value = token,
                 Expire = expire

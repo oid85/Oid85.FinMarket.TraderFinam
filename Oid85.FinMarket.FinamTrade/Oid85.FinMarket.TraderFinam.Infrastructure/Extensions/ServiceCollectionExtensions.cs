@@ -1,4 +1,5 @@
-﻿using Grpc.Tradeapi.V1.Auth;
+﻿using Grpc.Tradeapi.V1.Accounts;
+using Grpc.Tradeapi.V1.Auth;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +39,11 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration)
     {
         services.AddGrpcClient<AuthService.AuthServiceClient>(KnownGrpcClients.AuthServiceClient, options =>
+        {
+            options.Address = new Uri(configuration.GetValue<string>(KnownSettingsKeys.FinamGrpcUrl)!);
+        });
+
+        services.AddGrpcClient<AccountsService.AccountsServiceClient>(KnownGrpcClients.AccountsServiceClient, options =>
         {
             options.Address = new Uri(configuration.GetValue<string>(KnownSettingsKeys.FinamGrpcUrl)!);
         });

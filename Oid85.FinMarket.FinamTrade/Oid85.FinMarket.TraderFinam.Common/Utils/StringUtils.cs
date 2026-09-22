@@ -12,7 +12,7 @@ public static class StringUtils
         System.Text.Encoding.UTF8.GetString(
             Convert.FromBase64String(base64));
 
-    public static double ToDouble(string? input)
+    public static double ToDouble(this string input)
     {
         if (input is null) return 0.0;
 
@@ -24,6 +24,22 @@ public static class StringUtils
         input = input.Replace(".", separator);
 
         var result = Convert.ToDouble(input);
+
+        return result;
+    }
+
+    public static decimal ToDecimal(this string input)
+    {
+        if (input is null) return 0;
+
+        string separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+        input = input.Trim();
+        input = input.Replace(" ", "");
+        input = input.Replace(",", separator);
+        input = input.Replace(".", separator);
+
+        var result = Convert.ToDecimal(input);
 
         return result;
     }
