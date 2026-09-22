@@ -12,18 +12,18 @@ namespace Oid85.FinMarket.TraderFinam.WebHost.Controller;
 /// </summary>
 [Route("api/trader-finam")]
 [ApiController]
-public class BrokerController(
+public class TraderFinamController(
     ITraderService brokerService)
     : BaseController
 {
     /// <summary>
     /// Получить данные о портфеле
     /// </summary>
-    [HttpPost("portfolio")]
+    [HttpPost("portfolio-info")]
     [ProducesResponseType(typeof(BaseResponse<PortfolioInfoResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(BaseResponse<PortfolioInfoResponse>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(BaseResponse<PortfolioInfoResponse>), StatusCodes.Status500InternalServerError)]
-    public Task<IActionResult> GetPortfolioAsync(
+    public Task<IActionResult> GetPortfolioInfoAsync(
         [FromBody] PortfolioInfoRequest request) =>
         GetResponseAsync(
             () => brokerService.GetPortfolioInfoAsync(request),
