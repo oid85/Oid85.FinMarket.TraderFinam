@@ -34,7 +34,7 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             var accountResponse = await client.GetAccountAsync(accountRequest, metadata);
 
-            var totalSum = accountResponse.Equity.Value.ToDecimal();
+            decimal totalSum = accountResponse.Equity.Value.ToDecimal();
 
             var positions = new List<PositionData>();
 
