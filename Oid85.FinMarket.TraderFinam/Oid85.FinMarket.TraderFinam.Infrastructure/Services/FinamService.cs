@@ -55,7 +55,8 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             var response = new PortfolioInfoResponse 
             {
-                TotalSum = totalSum 
+                TotalSum = totalSum ,
+                Positions = positions
             };
 
             return response;
