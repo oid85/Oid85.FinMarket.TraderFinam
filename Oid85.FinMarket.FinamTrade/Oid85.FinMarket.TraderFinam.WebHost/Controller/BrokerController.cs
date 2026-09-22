@@ -8,9 +8,9 @@ using Oid85.FinMarket.TraderFinam.WebHost.Controller.Base;
 namespace Oid85.FinMarket.TraderFinam.WebHost.Controller;
 
 /// <summary>
-/// Брокер Финам
+/// Трейдер Финам
 /// </summary>
-[Route("api/broker-finam")]
+[Route("api/trader-finam")]
 [ApiController]
 public class BrokerController(
     ITraderService brokerService)

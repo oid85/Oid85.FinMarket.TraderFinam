@@ -8,18 +8,43 @@ using Oid85.FinMarket.TraderFinam.Core.Responses;
 
 namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 {
+    /// <inheritdoc />
     public class FinamService(
         GrpcClientFactory grpcClientFactory,
-        IParameterRepository parameterRepository)
+        IParameterRepository parameterRepository,
+        ITokenRepository tokenRepository)
         : IFinamService
     {
-        public async Task<JwtTokenResponse> GetJwtTokenAsync(JwtTokenRequest request)
+        /// <inheritdoc />
+        public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
         {
+            string token = await GetJwtTokenAsync();
+
+            var response = new PortfolioInfoResponse();
+
+            return response;
+        }
+
+        /// <inheritdoc />
+        public async Task<string> GetJwtTokenAsync()
+        {
+            string? token = await tokenRepository.GetTokenAsync();
+
+            if (token is not null)
+                return token;
+
             var client = grpcClientFactory.CreateClient<AuthService.AuthServiceClient>(KnownGrpcClients.AuthServiceClient);
 
-            var apiToken = await parameterRepository.GetParameterValueAsync(KnownParameterNames.ApiToken);
+            string apiToken = await parameterRepository.GetParameterValueAsync(KnownParameterNames.ApiToken) ?? throw new NullReferenceException();
 
-            return new();
+            var authRequest = new AuthRequest { Secret = apiToken };
+            var authResponse = await client.AuthAsync(authRequest);
+
+            token = authResponse.Token;
+
+            await tokenRepository.SaveTokenAsync(token, DateTime.Now.AddMinutes(15));
+
+            return token;
         }
     }
 }

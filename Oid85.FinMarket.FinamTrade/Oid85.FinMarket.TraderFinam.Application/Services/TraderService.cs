@@ -9,15 +9,8 @@ namespace Oid85.FinMarket.TraderFinam.Application.Services
         IFinamService finamService)
         : ITraderService
     {
-        public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
-        {
-            var response = await finamService.GetJwtTokenAsync(
-                new JwtTokenRequest
-                {
-
-                });
-
-            return new();
-        }
+        /// <inheritdoc />
+        public Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request) => 
+            finamService.GetPortfolioInfoAsync(request);
     }
 }
