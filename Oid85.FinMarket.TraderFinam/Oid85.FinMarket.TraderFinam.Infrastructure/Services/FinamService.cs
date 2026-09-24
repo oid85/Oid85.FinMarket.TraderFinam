@@ -42,15 +42,18 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
             {
                 string ticker = position.Symbol.Replace("@MISX", "");
                 int size = Convert.ToInt32(position.Quantity.Value.Replace("+", "").ToDouble());
-                decimal price = position.CurrentPrice.Value.ToDecimal();
-                decimal cost = price * size;
+                decimal currentPrice = position.CurrentPrice.Value.ToDecimal();
+                decimal dailyPnl = position.DailyPnl.Value.ToDecimal();
+                decimal cost = currentPrice * size;
 
                 positions.Add(
                     new PositionData
                     {
                         Ticker = ticker,
                         Size = size,
-                        Cost = cost
+                        Cost = cost,
+                        CurrentPrice = currentPrice,
+                        DailyPnl = dailyPnl
                     });
             }
 
