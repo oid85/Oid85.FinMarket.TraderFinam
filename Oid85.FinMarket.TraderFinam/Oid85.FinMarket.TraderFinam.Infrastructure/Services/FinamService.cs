@@ -36,6 +36,12 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             decimal totalSum = accountResponse.Equity.Value.ToDecimal();
 
+            decimal totalDailyPnl = 0;
+            decimal money = 0;
+
+            foreach (var cashItem in accountResponse.Cash.Where(x => x.CurrencyCode == "RUB"))
+                money += cashItem.Units + cashItem.Nanos / 1_000_000_000m;
+
             var positions = new List<PositionData>();
 
             foreach (var position in accountResponse.Positions)
@@ -45,6 +51,8 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
                 decimal currentPrice = position.CurrentPrice.Value.ToDecimal();
                 decimal dailyPnl = position.DailyPnl.Value.ToDecimal();
                 decimal cost = currentPrice * size;
+
+                totalDailyPnl += dailyPnl;
 
                 positions.Add(
                     new PositionData
@@ -59,7 +67,9 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             var response = new PortfolioInfoResponse 
             {
-                TotalSum = totalSum ,
+                TotalSum = totalSum,
+                TotalDailyPnl = totalDailyPnl,
+                Money = money,
                 Positions = positions
             };
 
