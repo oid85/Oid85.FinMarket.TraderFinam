@@ -34,7 +34,7 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             var accountResponse = await client.GetAccountAsync(accountRequest, metadata);
 
-            decimal totalSum = accountResponse.Equity.Value.ToDecimal();
+            decimal totalSum = Math.Round(accountResponse.Equity.Value.ToDecimal(), 2);
 
             decimal totalDailyPnl = 0;
             decimal money = 0;
