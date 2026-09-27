@@ -5,9 +5,6 @@
     /// </summary>
     public interface IJobService
     {
-        /// <summary>
-        /// Загрузить купоны
-        /// </summary>
         Task CheckOutboxAsync();
     }
 }
