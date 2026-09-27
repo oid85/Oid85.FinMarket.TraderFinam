@@ -9,6 +9,7 @@ public class TraderFinamContext(DbContextOptions<TraderFinamContext> options) : 
 {
     public DbSet<ParameterEntity> ParameterEntities { get; set; }
     public DbSet<TokenEntity> TokenEntities { get; set; }
+    public DbSet<OutboxTaskEntity> OutboxTaskEntities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

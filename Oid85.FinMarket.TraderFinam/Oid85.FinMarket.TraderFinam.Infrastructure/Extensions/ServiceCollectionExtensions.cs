@@ -32,6 +32,7 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient<IParameterRepository, ParameterRepository>();
         services.AddTransient<ITokenRepository, TokenRepository>();
+        services.AddTransient<IOutboxRepository, OutboxRepository>();
     }
 
     public static void ConfigureFinamGrpcClient(
