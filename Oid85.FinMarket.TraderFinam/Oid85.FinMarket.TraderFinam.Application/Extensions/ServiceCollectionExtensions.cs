@@ -15,6 +15,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services)
     {
         services.AddTransient<ITraderService, TraderService>();
+        services.AddTransient<IOutboxTaskService, OutboxTaskService>();
         services.AddTransient<IJobService, JobService>();
     }
 
