@@ -13,7 +13,7 @@ namespace Oid85.FinMarket.TraderFinam.WebHost.Controller;
 [Route("api/trader-finam")]
 [ApiController]
 public class TraderFinamController(
-    ITraderService brokerService)
+    ITraderService traderService)
     : BaseController
 {
     /// <summary>
@@ -26,6 +26,19 @@ public class TraderFinamController(
     public Task<IActionResult> GetPortfolioInfoAsync(
         [FromBody] PortfolioInfoRequest request) =>
         GetResponseAsync(
-            () => brokerService.GetPortfolioInfoAsync(request),
+            () => traderService.GetPortfolioInfoAsync(request),
             result => new BaseResponse<PortfolioInfoResponse> { Result = result });
+
+    /// <summary>
+    /// Получить список заданий Outbox
+    /// </summary>
+    [HttpPost("task/list")]
+    [ProducesResponseType(typeof(BaseResponse<OutboxTaskListResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<OutboxTaskListResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<OutboxTaskListResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> GetTaskListAsync(
+        [FromBody] OutboxTaskListRequest request) =>
+        GetResponseAsync(
+            () => traderService.GetOutboxTaskListAsync(request),
+            result => new BaseResponse<OutboxTaskListResponse> { Result = result });
 }

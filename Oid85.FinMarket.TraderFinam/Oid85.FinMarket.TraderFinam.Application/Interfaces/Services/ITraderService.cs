@@ -9,5 +9,6 @@ namespace Oid85.FinMarket.TraderFinam.Application.Interfaces.Services
     public interface ITraderService
     {
         Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request);
+        Task<OutboxTaskListResponse> GetOutboxTaskListAsync(OutboxTaskListRequest request);
     }
 }
