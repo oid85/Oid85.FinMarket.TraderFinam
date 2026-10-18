@@ -9,6 +9,11 @@ namespace Oid85.FinMarket.TraderFinam.Application.Interfaces.Services
     public interface IFinamService
     {
         /// <summary>
+        /// Получить цену по тикеру
+        /// </summary>
+        Task<GetInstrumentPriceResponse> GetInstrumentPriceAsync(GetInstrumentPriceRequest request);
+
+        /// <summary>
         /// Получить текущее состояние портфеля
         /// </summary>
         Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request);

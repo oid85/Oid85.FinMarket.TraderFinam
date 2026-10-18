@@ -2,6 +2,7 @@
 using Grpc.Net.ClientFactory;
 using Grpc.Tradeapi.V1.Accounts;
 using Grpc.Tradeapi.V1.Auth;
+using Grpc.Tradeapi.V1.Marketdata;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Repositories;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Services;
 using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
@@ -19,6 +20,29 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
         ITokenRepository tokenRepository)
         : IFinamService
     {
+        /// <inheritdoc />
+        public async Task<GetInstrumentPriceResponse> GetInstrumentPriceAsync(GetInstrumentPriceRequest request)
+        {
+            string token = await GetJwtTokenAsync();
+
+            var metadata = new Metadata { { "Authorization", $"Bearer {token}" } };
+
+            var client = grpcClientFactory.CreateClient<MarketDataService.MarketDataServiceClient>(KnownGrpcClients.MarketDataServiceClient);
+
+            var items = new List<TickerPriceItem>();
+
+            foreach (var ticker in request.Tickers)
+            {
+                var quoteRequest = new QuoteRequest { Symbol = ticker };
+                var quoteResponse = await client.LastQuoteAsync(quoteRequest, metadata);
+                var price = quoteResponse.Quote.Close.Value.ToDecimal();
+
+                items.Add(new TickerPriceItem { Ticker = ticker, Price = Convert.ToDouble(price) });
+            }
+
+            return new () { Items = items };
+        }
+
         /// <inheritdoc />
         public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
         {

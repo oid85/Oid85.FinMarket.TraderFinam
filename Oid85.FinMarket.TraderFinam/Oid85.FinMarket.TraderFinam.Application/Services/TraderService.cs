@@ -18,5 +18,9 @@ namespace Oid85.FinMarket.TraderFinam.Application.Services
         /// <inheritdoc />
         public async Task<OutboxTaskListResponse> GetOutboxTaskListAsync(OutboxTaskListRequest request) =>
             new() { Tasks = await outboxRepository.GetAsync() };
+
+        /// <inheritdoc />
+        public Task<GetInstrumentPriceResponse> GetInstrumentPriceAsync(GetInstrumentPriceRequest request) =>
+            finamService.GetInstrumentPriceAsync(request);
     }
 }
