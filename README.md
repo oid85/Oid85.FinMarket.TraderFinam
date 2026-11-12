@@ -1,1 +1,1 @@
-# Oid85.FinMarket.FinamTrade
+# Oid85.FinMarket.TraderFinam
