@@ -2,19 +2,10 @@
 
 namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Entities
 {
-    /// <summary>
-    /// Параметр
-    /// </summary>
     public class ParameterEntity : BaseEntity
     {
-        /// <summary>
-        /// Наименование
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Значение
-        /// </summary>
         public string Value { get; set; }
+        public string Description { get; set; }
     }
 }
