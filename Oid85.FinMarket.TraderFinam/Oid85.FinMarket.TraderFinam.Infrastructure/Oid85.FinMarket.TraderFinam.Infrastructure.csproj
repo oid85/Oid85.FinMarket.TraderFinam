@@ -61,4 +61,7 @@
 		<Protobuf Include="Protos/google/type/money.proto" ProtoRoot="Protos" GrpcServices="None" />
 		<Protobuf Include="Protos/google/type/date.proto" ProtoRoot="Protos" GrpcServices="None" />				
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Interfaces\Services\" />
+	</ItemGroup>
 </Project>

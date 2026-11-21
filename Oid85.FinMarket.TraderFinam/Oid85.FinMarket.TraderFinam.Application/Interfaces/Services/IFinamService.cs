@@ -21,6 +21,6 @@ namespace Oid85.FinMarket.TraderFinam.Application.Interfaces.Services
         /// <summary>
         /// Получить актуальный JWT токен
         /// </summary>
-        Task<string> GetJwtTokenAsync();
+        Task<string> GetJwtTokenAsync(string accountName);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Oid85.FinMarket.TraderFinam.Application.Interfaces.Repositories;
-using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Database.Entities;
 
 namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories
@@ -9,11 +8,12 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories
         IDbContextFactory<TraderFinamContext> contextFactory) 
         : ITokenRepository
     {
-        public async Task<string?> GetTokenAsync()
+        public async Task<string?> GetTokenAsync(string accountName)
         {
             await using var context = await contextFactory.CreateDbContextAsync();
 
             var entities = await context.TokenEntities
+                .Where(x => x.Name == $"Token:{accountName}")
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -28,13 +28,13 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories
             return entities[0].Value;
         }
 
-        public async Task SaveTokenAsync(string token, DateTime expire)
+        public async Task SaveTokenAsync(string accountName, string token, DateTime expire)
         {
             await using var context = await contextFactory.CreateDbContextAsync();
 
             var entity = new TokenEntity
             {
-                Name = KnownParameterNames.ApiToken,
+                Name = $"Token:{accountName}",
                 Value = token,
                 Expire = expire
             };

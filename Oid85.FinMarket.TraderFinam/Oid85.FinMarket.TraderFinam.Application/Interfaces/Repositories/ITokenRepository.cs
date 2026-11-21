@@ -2,7 +2,7 @@
 {
     public interface ITokenRepository
     {
-        Task<string?> GetTokenAsync();
-        Task SaveTokenAsync(string token, DateTime expire);
+        Task<string?> GetTokenAsync(string accountName);
+        Task SaveTokenAsync(string accountName, string token, DateTime expire);
     }
 }

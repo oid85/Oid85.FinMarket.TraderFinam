@@ -23,7 +23,7 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
         /// <inheritdoc />
         public async Task<GetInstrumentPriceResponse> GetInstrumentPriceAsync(GetInstrumentPriceRequest request)
         {
-            string token = await GetJwtTokenAsync();
+            string token = await GetJwtTokenAsync(request.AccountName);
 
             var metadata = new Metadata { { "Authorization", $"Bearer {token}" } };
 
@@ -46,13 +46,13 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
         /// <inheritdoc />
         public async Task<PortfolioInfoResponse> GetPortfolioInfoAsync(PortfolioInfoRequest request)
         {
-            string token = await GetJwtTokenAsync();
+            string token = await GetJwtTokenAsync(request.AccountName);
 
             var metadata = new Metadata { { "Authorization", $"Bearer {token}" } };
 
             var client = grpcClientFactory.CreateClient<AccountsService.AccountsServiceClient>(KnownGrpcClients.AccountsServiceClient);
 
-            string accountId = await parameterRepository.GetParameterValueAsync(KnownParameterNames.AccountId) ?? throw new NullReferenceException();
+            string accountId = await parameterRepository.GetParameterValueAsync($"Account:{request.AccountName}") ?? throw new NullReferenceException();
 
             var accountRequest = new GetAccountRequest { AccountId = accountId };
 
@@ -101,16 +101,16 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
         }
 
         /// <inheritdoc />
-        public async Task<string> GetJwtTokenAsync()
+        public async Task<string> GetJwtTokenAsync(string accountName)
         {
-            string? token = await tokenRepository.GetTokenAsync();
+            string? token = await tokenRepository.GetTokenAsync(accountName);
 
             if (token is not null)
                 return token;
 
             var client = grpcClientFactory.CreateClient<AuthService.AuthServiceClient>(KnownGrpcClients.AuthServiceClient);
 
-            string apiToken = await parameterRepository.GetParameterValueAsync(KnownParameterNames.ApiToken) ?? throw new NullReferenceException();
+            string apiToken = await parameterRepository.GetParameterValueAsync($"Token:{accountName}") ?? throw new NullReferenceException();
 
             var authRequest = new AuthRequest { Secret = apiToken };
 
@@ -118,7 +118,7 @@ namespace Oid85.FinMarket.TraderFinam.Infrastructure.Services
 
             token = authResponse.Token;
 
-            await tokenRepository.SaveTokenAsync(token, DateTime.UtcNow.AddMinutes(15));
+            await tokenRepository.SaveTokenAsync(accountName, token, DateTime.UtcNow.AddMinutes(15));
 
             return token;
         }

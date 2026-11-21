@@ -10,7 +10,6 @@ using Oid85.FinMarket.TraderFinam.Application.Interfaces.Services;
 using Oid85.FinMarket.TraderFinam.Common.KnownConstants;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Database;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Database.Repositories;
-using Oid85.FinMarket.TraderFinam.Infrastructure.Interfaces.Services;
 using Oid85.FinMarket.TraderFinam.Infrastructure.Services;
 
 namespace Oid85.FinMarket.TraderFinam.Infrastructure.Extensions;
@@ -60,7 +59,6 @@ public static class ServiceCollectionExtensions
     this IServiceCollection services)
     {
         services.AddTransient<IFinamService, FinamService>();
-        services.AddTransient<ITokenService, TokenService>();
     }
 
     public static async Task ApplyMigrations(this IHost host)
